@@ -32,7 +32,7 @@ class _Student {
 
 class _Classroom {
     private name: string;
-    private _students: Student[];
+    private _students: _Student[];
 
     constructor(name: string) {
         this.name = name;
@@ -48,12 +48,12 @@ class _Classroom {
         }
     }
 
-    public addStudent(student: Student): void {
+    public addStudent(student: _Student): void {
         this._students.push(student);
         console.log(`Đã thêm ${student.getName()} vào lớp ${this.name}`);
     }
 
-    public filterStudent(id: number): Student[] {
+    public filterStudent(id: number): _Student[] {
         const foundStudents = this._students.filter(student => student.getId() === id);
         if (foundStudents.length === 0) {
             console.log(`Không tìm thấy học sinh với ID ${id} trong lớp ${this.name}`);
@@ -79,7 +79,7 @@ class _Classroom {
         const index = this._students.findIndex(_student => _student.getId() === id);
         if (index !== -1) {
             const _deletedStudent = this._students.splice(index, 1)[0];
-            _allStudents.push(_deleteStudent);
+            _allStudents.push(_deletedStudent);
             console.log(`Đã xóa ${_deletedStudent.getName()} khỏi lớp ${this.name} và thêm vào mảng tất cả học sinh.`);
         } else {
             console.log(`Không tìm thấy học sinh với ID ${id} trong lớp ${this.name}.`);
@@ -87,7 +87,7 @@ class _Classroom {
     }
 
     public updateStudent(id: number, newId?: number, newName?: string): void {
-        const student = this._students.find(_student => student.getId() === id);
+        const student = this._students.find(_student => _student.getId() === id);
         if (student) {
             if (newId !== undefined) {
                 student._setId(newId);
